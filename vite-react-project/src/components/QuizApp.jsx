@@ -2,7 +2,7 @@
 import { useState } from "react";
 //import AnswerCheck from "./AnswerCheck";
 
-//個々のコンポーネントでは問題文や問題表示の管理を行います
+//問題文や問題表示の管理を行います
 function Questions() {
   const [started, setStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -10,15 +10,8 @@ function Questions() {
   const [score, setScore] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
-  //クイズも問題数
-  const numbers = [
-    "第一問",
-    "第二問",
-    "第三問",
-    "第四問",
-    "ラスト問題",
-    "終了",
-  ];
+  //クイズの問題数
+  const numbers = ["第一問", "第二問", "第三問", "第四問", "ラスト問題"];
   //クイズの問題文
   const sentences = [
     "次の記号は何でしょう",
@@ -46,11 +39,12 @@ function Questions() {
   //クイズの解答
   const answers = ["ZIKKEN", "ねぼう", "ころしや", "HOT", "MONEY"];
 
-  //スタートボタンが押された時に、表示画面を変える
+  //スタートボタンが押された時に、表示画面を変えます
   const startButton = () => {
     setStarted(true);
   };
 
+  //次の問題へを押したときに正誤判定やエラー表示をします
   const answerSubmit = () => {
     const questionAnswer = answers[currentQuestionIndex];
     const trimmedUserAnswer = userAnswer.trim().toUpperCase();
@@ -73,7 +67,7 @@ function Questions() {
       nextQuestion();
     }
   };
-  //次へボタンが押されるたびに、indexの数を増やす
+  //indexの数を増やし、次の問題に移ります
   const nextQuestion = () => {
     setCurrentQuestionIndex((index) => ++index);
     setUserAnswer("");
@@ -89,8 +83,8 @@ function Questions() {
       </div>
     );
   }
-
-  if (currentQuestionIndex === numbers.length - 1) {
+  //もしindexが問題数と同じになったら、終了画面を表示
+  if (currentQuestionIndex === QuestionsArray.length) {
     return (
       <div className="card">
         <h1>終了</h1>
@@ -100,6 +94,7 @@ function Questions() {
       </div>
     );
   } else {
+    //indexが問題数と同じになるまで問題画面
     return (
       <div className="text-2xl">
         <h2>{numbers[currentQuestionIndex]}</h2>
