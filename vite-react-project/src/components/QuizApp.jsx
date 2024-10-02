@@ -72,6 +72,11 @@ function Questions() {
     setCurrentQuestionIndex((index) => ++index);
     setUserAnswer("");
   };
+  //スタートに戻るを押すとスタート画面に戻り、indexを0にする
+  const returnToStart = () => {
+    setStarted(false);
+    setCurrentQuestionIndex(0);
+  };
 
   //startedがfalseならスタートボタンを表示
   if (!started) {
@@ -91,6 +96,9 @@ function Questions() {
         <p className="text-5xl">
           スコア： {score}/{QuestionsArray.length}
         </p>
+        <button className="btn btn-primary mt-6 mx-20" onClick={returnToStart}>
+          スタートへ戻る
+        </button>
       </div>
     );
   } else {
